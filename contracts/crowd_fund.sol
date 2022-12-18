@@ -37,7 +37,7 @@ contract CrowdFund{
         balance += msg.value;
         // mapping sender to amount sent
         userToAmountSent[_username] += msg.value;
-        funders.push(_username)
+        funders.push(_username);
     }
 
     function check_balance(address _address) public view returns (uint){
@@ -49,7 +49,10 @@ contract CrowdFund{
         payable(msg.sender).transfer(address(this).balance);
         balance = 0;
 
-
+        // setting all the values from funders to zero since all funds have been withdrawn
+        for (uint i = 0; i < funders.length; i++){
+            userToAmountSent[funders[0]] = 0;
+        }
     }
 
 
@@ -60,5 +63,14 @@ contract CrowdFund{
         // checking if the message sender is the owner of the contract.
         require(msg.sender == owner, "Only The Owner Can Withdraw Funds.");
         _;
+    }
+}
+
+
+
+// A Contract Factory that creates CrowdFund Contracts
+contract CrowdFundFactory{
+    function createCrowdFundContract(string memory _name, string memory _description) public {
+        CrowdFund newCrowdFund = CrowdFund()
     }
 }
