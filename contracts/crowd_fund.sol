@@ -5,8 +5,10 @@
 pragma solidity ^0.8;
 
 contract CrowdFund{
+    // state variables
     address public owner;
     string name;
+    bytes32 ownerName;
     string description;
     uint balance;
 
@@ -15,15 +17,21 @@ contract CrowdFund{
 
     string[] public funders;
 
+    // modifiers
+    modifier onlyOwner {
+        // checking if the message sender is the owner of the contract.
+        require(msg.sender == owner, "Only The Owner Can Withdraw Funds.");
+        _;
+    }
 
 
 
-
-    constructor(string memory _name, string memory _description){
+    constructor(string memory _name, string memory _description, bytes32 _ownerName){
         // assigning whoever creates the contract as the owner
         owner = msg.sender;
         name = _name;
         description = _description;
+        ownerName = _ownerName;
     }
 
 
@@ -55,22 +63,36 @@ contract CrowdFund{
         }
     }
 
-
-
-    // modifiers
-
-    modifier onlyOwner {
-        // checking if the message sender is the owner of the contract.
-        require(msg.sender == owner, "Only The Owner Can Withdraw Funds.");
-        _;
-    }
+    function numberOfFunders() public view returns (uint) {return funders.length;}
 }
 
 
 
 // A Contract Factory that creates CrowdFund Contracts
 contract CrowdFundFactory{
-    function createCrowdFundContract(string memory _name, string memory _description) public {
-        CrowdFund newCrowdFund = CrowdFund()
+    // mappings and arrays
+    mapping(string => CrowdFund) public nameToCrowdFund;
+    mapping(bytes32 => CrowdFund[]) public ownerToCrowdFunds;
+    CrowdFund[] public createdCrowdFunds;
+
+
+    function createCrowdFundContract(string memory _name, string memory _description, bytes32 _ownerName) public {
+        // creating new fund me contract
+        CrowdFund newCrowdFund = new CrowdFund(_name, _description, _ownerName);
+
+        // adding to maps and creating array
+        ownerToCrowdFunds[_ownerName].push(newCrowdFund);
+        nameToCrowdFund[_name] = newCrowdFund;
+        createdCrowdFunds.push(newCrowdFund);
+    }
+
+    function getSingleCrowdFund(string memory _name) public view returns (CrowdFund) {
+        require(crowdFundExists(_name), "There Is No CrowdFund With That Name");
+        return(nameToCrowdFund[_name]);
+    }
+
+    function crowdFundExists(string memory _name) public new_mod view returns (bool) {
+        // checking if there is any crowd fund linked to this name
+        return abi.encodePacked(nameToCrowdFund[_name]).length > 0 ? true : false;
     }
 }
