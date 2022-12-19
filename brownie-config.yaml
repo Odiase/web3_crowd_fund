@@ -1,0 +1,6 @@
+dotenv: .env
+
+
+# wallets
+wallets:
+  goerli: ${GOERLI_PRIVATE_KEY}
