@@ -1,4 +1,2 @@
 # third party packages imports
-from brownie import net
-
-def get_account():
+from brownie import network, accounts, config
