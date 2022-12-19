@@ -68,6 +68,7 @@ contract CrowdFund{
 
 
 
+
 // A Contract Factory that creates CrowdFund Contracts
 contract CrowdFundFactory{
     // mappings and arrays
@@ -91,8 +92,21 @@ contract CrowdFundFactory{
         return(nameToCrowdFund[_name]);
     }
 
-    function crowdFundExists(string memory _name) public new_mod view returns (bool) {
+    function getOwnerCrowdFunds(bytes32 _ownerName) public view returns (CrowdFund[] memory){
+        require(ownerExists(_ownerName), "This USer Does Not HAve Any Crowd Fund.");
+        return ownerToCrowdFunds[_ownerName];
+    }
+
+
+    // helper functions
+
+    function crowdFundExists(string memory _name) internal view returns (bool) {
         // checking if there is any crowd fund linked to this name
         return abi.encodePacked(nameToCrowdFund[_name]).length > 0 ? true : false;
+    }
+
+    function ownerExists(bytes32 _ownerName) internal view returns (bool) {
+        // checking if there is any crowd fund with an owner that has that name
+        return abi.encodePacked(ownerToCrowdFunds[_ownerName]).length > 0 ? true : false;
     }
 }
