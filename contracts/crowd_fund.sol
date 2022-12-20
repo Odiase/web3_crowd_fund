@@ -67,6 +67,9 @@ contract CrowdFund{
 }
 
 
+contract me {
+
+}
 
 
 // A Contract Factory that creates CrowdFund Contracts
@@ -89,13 +92,20 @@ contract CrowdFundFactory{
 
     function getSingleCrowdFund(string memory _name) public view returns (CrowdFund) {
         require(crowdFundExists(_name), "There Is No CrowdFund With That Name");
-        return(nameToCrowdFund[_name]);
+        CrowdFund crowd_fund = CrowdFund(address(nameToCrowdFund[_name]));
+        return(crowd_fund);
     }
 
     function getOwnerCrowdFunds(bytes32 _ownerName) public view returns (CrowdFund[] memory){
-        require(ownerExists(_ownerName), "This USer Does Not HAve Any Crowd Fund.");
-        return ownerToCrowdFunds[_ownerName];
+        require(ownerExists(_ownerName), "This User Does Not Have Any Crowd Fund.");
+        CrowdFund[] memory crowd_funds = ownerToCrowdFunds[_ownerName];
+        // CrowdFund[] object_array;
+        // for (uint i = 0; i < crowd_funds.length; i++) {
+        //     object_array.push(getCrowdFundObject(crowd_funds[i]));
+        // }
+        return crowd_funds;
     }
+
 
 
     // helper functions
