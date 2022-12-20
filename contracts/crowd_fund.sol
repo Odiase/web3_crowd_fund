@@ -8,7 +8,7 @@ contract CrowdFund{
     // state variables
     address public owner;
     string name;
-    bytes32 ownerName;
+    string ownerName;
     string description;
     uint balance;
 
@@ -26,7 +26,7 @@ contract CrowdFund{
 
 
 
-    constructor(string memory _name, string memory _description, bytes32 _ownerName){
+    constructor(string memory _name, string memory _description, string memory _ownerName){
         // assigning whoever creates the contract as the owner
         owner = msg.sender;
         name = _name;
@@ -67,20 +67,17 @@ contract CrowdFund{
 }
 
 
-contract me {
-
-}
 
 
 // A Contract Factory that creates CrowdFund Contracts
 contract CrowdFundFactory{
     // mappings and arrays
     mapping(string => CrowdFund) public nameToCrowdFund;
-    mapping(bytes32 => CrowdFund[]) public ownerToCrowdFunds;
+    mapping(string => CrowdFund[]) public ownerToCrowdFunds;
     CrowdFund[] public createdCrowdFunds;
 
 
-    function createCrowdFundContract(string memory _name, string memory _description, bytes32 _ownerName) public {
+    function createCrowdFundContract(string memory _name, string memory _description, string memory _ownerName) public {
         // creating new fund me contract
         CrowdFund newCrowdFund = new CrowdFund(_name, _description, _ownerName);
 
@@ -96,7 +93,7 @@ contract CrowdFundFactory{
         return(crowd_fund);
     }
 
-    function getOwnerCrowdFunds(bytes32 _ownerName) public view returns (CrowdFund[] memory){
+    function getOwnerCrowdFunds(string memory _ownerName) public view returns (CrowdFund[] memory){
         require(ownerExists(_ownerName), "This User Does Not Have Any Crowd Fund.");
         CrowdFund[] memory crowd_funds = ownerToCrowdFunds[_ownerName];
         // CrowdFund[] object_array;
@@ -106,6 +103,9 @@ contract CrowdFundFactory{
         return crowd_funds;
     }
 
+    function check_balance(string memory _name) public view returns (uint256) {
+        return(CrowdFund(address(nameToCrowdFund[_name])).check_balance(msg.sender));
+    }
 
 
     // helper functions
@@ -115,7 +115,7 @@ contract CrowdFundFactory{
         return abi.encodePacked(nameToCrowdFund[_name]).length > 0 ? true : false;
     }
 
-    function ownerExists(bytes32 _ownerName) internal view returns (bool) {
+    function ownerExists(string memory _ownerName) internal view returns (bool) {
         // checking if there is any crowd fund with an owner that has that name
         return abi.encodePacked(ownerToCrowdFunds[_ownerName]).length > 0 ? true : false;
     }
