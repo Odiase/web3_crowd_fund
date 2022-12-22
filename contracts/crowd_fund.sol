@@ -96,10 +96,6 @@ contract CrowdFundFactory{
     function getOwnerCrowdFunds(string memory _ownerName) public view returns (CrowdFund[] memory){
         require(ownerExists(_ownerName), "This User Does Not Have Any Crowd Fund.");
         CrowdFund[] memory crowd_funds = ownerToCrowdFunds[_ownerName];
-        // CrowdFund[] object_array;
-        // for (uint i = 0; i < crowd_funds.length; i++) {
-        //     object_array.push(getCrowdFundObject(crowd_funds[i]));
-        // }
         return crowd_funds;
     }
 
@@ -120,3 +116,8 @@ contract CrowdFundFactory{
         return abi.encodePacked(ownerToCrowdFunds[_ownerName]).length > 0 ? true : false;
     }
 }
+
+
+
+
+    //hi my name is efosa and going on i will be asking you questions on solidity, smart contracts, python
