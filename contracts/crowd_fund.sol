@@ -70,7 +70,7 @@ contract CrowdFund{
         }
     }
 
-    function getAttributes() public view returns (string, string, uint256, uint256) {
+    function getAttributes() public view returns (string memory, string memory, uint256, uint256) {
         return (name, ownerName, balance, numberOfFunders());
     }
 
