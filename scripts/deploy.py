@@ -1,3 +1,6 @@
+# stlib imports
+import time
+
 # third party packages imports
 from brownie import network, accounts, config, CrowdFundFactory
 
@@ -10,6 +13,7 @@ def deploy_contract():
 
     # deploying contract
     contract_transaction = CrowdFundFactory.deploy({"from" : account})
+    time.sleep(1)
     return contract_transaction
 
 
