@@ -109,7 +109,7 @@ contract CrowdFundFactory{
         createdCrowdFunds.push(newCrowdFund);
     }
 
-    function getSingleCrowdFund(string memory _name) public view returns (CrowdFund) {
+    function getSingleCrowdFund(string memory _name) public view returns (string memory, string memory, uint256, uint256) {
         require(crowdFundExists(_name), "There Is No CrowdFund With That Name");
         CrowdFund crowd_fund = getCrowdFundObject(_name);
 
