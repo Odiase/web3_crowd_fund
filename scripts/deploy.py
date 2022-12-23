@@ -12,8 +12,11 @@ def deploy_contract():
     account = get_account()
 
     # deploying contract
-    contract_transaction = CrowdFundFactory.deploy({"from" : account})
-    time.sleep(1)
+    if len(CrowdFundFactory) == 0:
+        contract_transaction = CrowdFundFactory.deploy({"from" : account})
+        time.sleep(1)
+    else:
+        contract_transaction = CrowdFundFactory[-1]
     return contract_transaction
 
 
