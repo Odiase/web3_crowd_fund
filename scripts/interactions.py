@@ -11,7 +11,7 @@ def create_crowd_fund():
     This Crowd is to here to help refugees tht are stuck in the Ukraine and Russia War, and also 
     to send Relief materials and supplies.
     '''
-    CROWD_FUND_NAME = "UkrRus"
+    CROWD_FUND_NAME = "RON"
 
     tx = contract.createCrowdFundContract(CROWD_FUND_NAME, DESCRIPTION, NAME, {"from" : account})
     tx.wait(1)
@@ -20,10 +20,10 @@ def get_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    CROWD_FUND_NAME = "UkrRus"
+    CROWD_FUND_NAME = "RON"
 
     try:
-        crowd_fund_tx = contract.getSingleCrowdFund("UkrRus")
+        crowd_fund_tx = contract.getSingleCrowdFund(CROWD_FUND_NAME)
     except:
         print("This CrowdFund Doesn't Exist")
 
@@ -42,7 +42,7 @@ def fund_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    tx = contract.fund("Efosa", "UkrRus", {"from" : account, "value" : 3000000000000000000})
+    tx = contract.fund("Efosa", "RON", {"from" : account, "value" : 3000000000000000000})
     tx.wait(1)
 
 
@@ -50,14 +50,14 @@ def withdraw_funds():
     account = get_account()
     contract = get_factory_contract()
 
-    tx = contract.withdrawBalance("UkrRus", {"from" : account})
-    tx.wait(1)    
+    tx = contract.withdrawBalance("RON", {"from" : account})
+    tx.wait(1)
 
 
 def main():
     # create_crowd_fund()
     # fund_crowd_fund()
     withdraw_funds()
-    get_crowd_fund()
+    # get_crowd_fund()
 
     

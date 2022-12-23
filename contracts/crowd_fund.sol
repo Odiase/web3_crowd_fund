@@ -14,7 +14,9 @@ contract CrowdFund{
 
     // mappings and arrays
     mapping(string => uint) public userToAmountSent;
+    mapping(address => bool) public Funded;
 
+    // array
     string[] public funders;
 
     // modifiers
@@ -43,9 +45,12 @@ contract CrowdFund{
         // uint256 valueInWei = amount ether;
         balance += amount;
         
-        // mapping sender to amount sent
+        // mapping sender to the amount sent
         userToAmountSent[_username] += amount;
-        funders.push(_username);
+
+        // adding sender to array
+        if (Funded[sender] == true){}
+        else {funders.push(_username);}
     }
 
     function getBalance() public view returns (uint) {
