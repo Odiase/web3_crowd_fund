@@ -100,7 +100,10 @@ contract CrowdFundFactory{
 
 
     function createCrowdFundContract(string memory _name, string memory _description, string memory _ownerName) public {
-        // creating new fund me contract
+        // checking if a crowd fund with this name exists
+        require(crowdFundExists(_name) == false, "A Crowd Fund With This Name Already Exists.");
+
+        // creating new CrowdFund contract
         CrowdFund newCrowdFund = new CrowdFund(_name, _description, _ownerName, msg.sender);
 
         // adding to maps and creating array
@@ -145,11 +148,17 @@ contract CrowdFundFactory{
     }
 
 
+
+
     // helper functions
 
     function crowdFundExists(string memory _name) internal view returns (bool) {
         // checking if there is any crowd fund linked to this name
-        return abi.encodePacked(nameToCrowdFund[_name]).length > 0 ? true : false;
+        if (address(nameToCrowdFund[_name]) == 0x0000000000000000000000000000000000000000) {
+            return false;
+        }
+        return true;
+        // return abi.encodePacked(nameToCrowdFund[_name]).length > 0 ? true : false;
     }
 
     function ownerExists(string memory _ownerName) internal view returns (bool) {
