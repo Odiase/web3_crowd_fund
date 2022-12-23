@@ -70,7 +70,11 @@ contract CrowdFund{
         }
     }
 
-    function numberOfFunders() public view returns (uint) {return funders.length;}
+    function getAttributes() public view returns (string, string, uint256, uint256) {
+        return (name, ownerName, balance, numberOfFunders());
+    }
+
+    function numberOfFunders() public view returns (uint256) {return funders.length;}
 }
 
 
@@ -108,7 +112,9 @@ contract CrowdFundFactory{
     function getSingleCrowdFund(string memory _name) public view returns (CrowdFund) {
         require(crowdFundExists(_name), "There Is No CrowdFund With That Name");
         CrowdFund crowd_fund = getCrowdFundObject(_name);
-        return(crowd_fund);
+
+        // return data
+        return(crowd_fund.getAttributes());
     }
 
     function getOwnerCrowdFunds(string memory _ownerName) public view returns (CrowdFund[] memory){

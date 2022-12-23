@@ -1,5 +1,5 @@
 # third party packages imports
-from brownie import network, accounts, config
+from brownie import network, accounts, config, CrowdFundFactory
 
 def get_account():
     '''Gets a ethereum account based on the network'''
@@ -10,3 +10,8 @@ def get_account():
     else:
         return accounts[0]
 
+
+def get_factory_contract():
+    '''return the latest deployed CrowdFundFactory contract'''
+    
+    return CrowdFundFactory[-1]
