@@ -4,3 +4,4 @@ dotenv: .env
 # wallets
 wallets:
   goerli: ${GOERLI_PRIVATE_KEY}
+  ganache-local: ${GANACHE_LOCAL_PRIVATE_KEY}
