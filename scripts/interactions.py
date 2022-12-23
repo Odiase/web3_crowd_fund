@@ -29,6 +29,14 @@ def get_crowd_fund():
 
     print(crowd_fund_tx)
 
+    # returned data
+    crowd_fund_name = crowd_fund_tx[0]
+    crowd_fund_owner = crowd_fund_tx[1]
+    balance = crowd_fund_tx[2] / (1 * (10 ** 18))
+    funders = crowd_fund_tx[3]
+
+    print(f"The Crowd Fund '{crowd_fund_name}' which was Created by '{crowd_fund_owner}' and has a balance of {balance} ether   with this amount of funders {funders}")
+
 
 def fund_crowd_fund():
     account = get_account()
@@ -37,18 +45,19 @@ def fund_crowd_fund():
     tx = contract.fund("Efosa", "UkrRus", {"from" : account, "value" : 3000000000000000000})
     tx.wait(1)
 
-    # returned data
-    crowd_fund_name = tx[0]
-    crowd_fund_owner = tx[1]
-    balance = tx[2]
-    funders = tx[3]
 
-    print(f"The Crowd Fund '{crowd_fund_name}' which was Created by '{crowd_fund_owner}' and has a balance of {balance} with this amount of funders {funders}")
+def withdraw_funds():
+    account = get_account()
+    contract = get_factory_contract()
+
+    tx = contract.withdrawBalance("UkrRus", {"from" : account})
+    tx.wait(1)    
 
 
 def main():
     # create_crowd_fund()
     # fund_crowd_fund()
+    withdraw_funds()
     get_crowd_fund()
 
     
