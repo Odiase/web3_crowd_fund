@@ -10,7 +10,6 @@ def deploy_contract():
 
     # deploying contract
     contract_transaction = CrowdFundFactory.deploy({"from" : account})
-    contract_transaction.wait(1)
     return contract_transaction
 
 
