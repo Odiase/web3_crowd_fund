@@ -36,7 +36,7 @@ contract CrowdFund{
 
 
     function fund(string memory _username, uint256 amount, address sender) public payable {
-        uint256 leastValue = 256305105597703 wei;
+        uint256 leastValue = 256305105597703;
 
         // checking to make sure something is sent
         require(sender.balance >= leastValue, "This is too little to be sent.");
@@ -50,7 +50,10 @@ contract CrowdFund{
 
         // adding sender to array
         if (Funded[sender] == true){}
-        else {funders.push(_username);}
+        else {
+            funders.push(_username);
+            Funded[sender] = true;
+        }
     }
 
     function getBalance() public view returns (uint) {
