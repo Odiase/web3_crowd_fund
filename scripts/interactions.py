@@ -59,9 +59,9 @@ def withdraw_funds():
 
 
 def main():
-    # create_crowd_fund()
-    fund_crowd_fund()
-    #withdraw_funds()
-    get_crowd_fund()
+    #create_crowd_fund()
+    #fund_crowd_fund()
+    withdraw_funds()
+    #get_crowd_fund()
 
     

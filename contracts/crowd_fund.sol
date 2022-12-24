@@ -106,6 +106,16 @@ contract CrowdFundFactory{
     mapping(string => CrowdFund[]) public ownerToCrowdFunds;
     CrowdFund[] public createdCrowdFunds;
 
+    // structs
+    struct CrowdFundTuple{
+        string name;
+        string ownerName;
+        uint256 balance;
+        uint256 founders;
+    }
+
+
+
 
     function createCrowdFundContract(string memory _name, string memory _description, string memory _ownerName) public {
         // checking if a crowd fund with this name exists
@@ -128,10 +138,20 @@ contract CrowdFundFactory{
         return(crowd_fund.getAttributes());
     }
 
-    function getOwnerCrowdFunds(string memory _ownerName) public view returns (CrowdFund[] memory){
+    function getOwnerCrowdFunds(string memory _ownerName) public view returns (CrowdFundTuple[] memory){
         require(ownerExists(_ownerName), "This User Does Not Have Any Crowd Fund.");
         CrowdFund[] memory crowd_funds = ownerToCrowdFunds[_ownerName];
-        return crowd_funds;
+
+        // creating an array of type CrowdFundTuple that will hold a tuple of informations concerning a crowd fund
+        CrowdFundTuple[] memory crowd_fund_tuple;
+
+        for (uint256 i=0; i < crowd_funds.length; i++){
+            // creating a Crowd_fund_tuple instance for all the user's crowdfunds
+            // and adding them to the tuple array above
+            CrowdFund crowd_fund = crowd_funds[i];
+            crowd_fund_tuple[i] = CrowdFundTuple(crowd_fund.name(), crowd_fund.ownerName(), crowd_fund.balance(), crowd_fund.numberOfFunders());
+        }
+        return crowd_fund_tuple;
     }
 
     function fund(string memory _username, string memory _crowd_fund_name) public payable {
