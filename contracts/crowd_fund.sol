@@ -147,7 +147,7 @@ contract CrowdFundFactory{
 
         for (uint256 i=0; i < crowd_funds.length; i++){
             // creating a Crowd_fund_tuple instance for all the user's crowdfunds
-            // and adding them to the tuple array above
+            // and adding them to the tuple array abovei
             CrowdFund crowd_fund = crowd_funds[i];
             crowd_fund_tuple[i] = CrowdFundTuple(crowd_fund.name(), crowd_fund.ownerName(), crowd_fund.balance(), crowd_fund.numberOfFunders());
         }

@@ -11,7 +11,7 @@ def create_crowd_fund():
     This Crowd is to here to help refugees tht are stuck in the Ukraine and Russia War, and also 
     to send Relief materials and supplies.
     '''
-    CROWD_FUND_NAME = "UkrRus"
+    CROWD_FUND_NAME = "RON"
 
     tx = contract.createCrowdFundContract(CROWD_FUND_NAME, DESCRIPTION, NAME, {"from" : account})
     tx.wait(1)
@@ -58,10 +58,21 @@ def withdraw_funds():
     tx.wait(1)
 
 
+def get_user_crowdFunds():
+    account = get_account()
+    contract = get_factory_contract()
+
+    NAME = "Efosa"
+
+    crowd_funds = contract.getOwnerCrowdFunds(NAME)
+    print(crowd_funds)
+
+
 def main():
-    #create_crowd_fund()
+    # create_crowd_fund()
     #fund_crowd_fund()
-    withdraw_funds()
+    #withdraw_funds()
     #get_crowd_fund()
+    get_user_crowdFunds()
 
     
