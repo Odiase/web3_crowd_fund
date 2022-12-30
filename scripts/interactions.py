@@ -57,6 +57,12 @@ def withdraw_funds():
     tx = contract.withdrawBalance(name, {"from" : account})
     tx.wait(1)
 
+def get_crowd_fund_by_address(address):
+    account = get_account()
+    contract = get_factory_contract()
+
+    tx = contract.getSingleCrowdFundByAddress(address)
+    return tx
 
 def get_user_crowdFunds():
     account = get_account()
@@ -64,12 +70,13 @@ def get_user_crowdFunds():
 
     NAME = "Efosa"
 
-    crowd_funds = contract.getOwnerCrowdFunds(NAME)
+    crowd_fund_addresses = contract.getOwnerCrowdFunds(NAME)
+    crowd_funds = [get_crowd_fund_by_address(i) for i in crowd_fund_addresses]
     print(crowd_funds)
 
 
 def main():
-    # create_crowd_fund()
+    create_crowd_fund()
     #fund_crowd_fund()
     #withdraw_funds()
     #get_crowd_fund()

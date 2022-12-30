@@ -129,7 +129,7 @@ contract CrowdFundFactory{
         return(crowd_fund.getAttributes());
     }
 
-    function getSingleCrowdFundByAddress(address _address) internal view returns (string memory, string memory, uint256, uint256) {
+    function getSingleCrowdFundByAddress(address _address) public view returns (string memory, string memory, uint256, uint256) {
         CrowdFund crowd_fund = CrowdFund(address(_address));
 
         // return data
