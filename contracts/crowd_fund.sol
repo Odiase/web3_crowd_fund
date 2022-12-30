@@ -108,12 +108,12 @@ contract CrowdFundFactory{
 
 
 
-    function createCrowdFundContract(string memory _name, string memory _description, string memory _ownerName) public {
+    function createCrowdFundContract(string memory _name, string memory _description, string memory _ownerName, address _owner_address) public {
         // checking if a crowd fund with this name exists
         require(crowdFundExists(_name) == false, "A Crowd Fund With This Name Already Exists.");
 
         // creating new CrowdFund contract
-        CrowdFund newCrowdFund = new CrowdFund(_name, _description, _ownerName, msg.sender);
+        CrowdFund newCrowdFund = new CrowdFund(_name, _description, _ownerName, _owner_address);
 
         // adding to maps and creating array
         ownerToCrowdFunds[_ownerName].push(newCrowdFund);
