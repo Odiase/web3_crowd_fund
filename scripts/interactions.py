@@ -20,7 +20,7 @@ def get_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    CROWD_FUND_NAME = "#EndSars"
+    CROWD_FUND_NAME = "UkrRusJs"
 
     try:
         crowd_fund_tx = contract.getSingleCrowdFund(CROWD_FUND_NAME)
