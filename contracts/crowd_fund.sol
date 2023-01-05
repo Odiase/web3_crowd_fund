@@ -78,8 +78,8 @@ contract CrowdFund{
         }
     }
 
-    function getAttributes() public view returns (string memory, string memory, uint256, uint256) {
-        return (name, ownerName, balance, numberOfFunders());
+    function getAttributes() public view returns (string memory, string memory, uint256, uint256, string memory) {
+        return (name, ownerName, balance, numberOfFunders(), description);
     }
 
     function numberOfFunders() public view returns (uint256) {return funders.length;}
@@ -121,7 +121,7 @@ contract CrowdFundFactory{
         createdCrowdFunds.push(newCrowdFund);
     }
 
-    function getSingleCrowdFund(string memory _name) public view returns (string memory, string memory, uint256, uint256) {
+    function getSingleCrowdFund(string memory _name) public view returns (string memory, string memory, uint256, uint256, string memory) {
         require(crowdFundExists(_name), "There Is No CrowdFund With That Name");
         CrowdFund crowd_fund = getCrowdFundObject(_name);
 
@@ -129,7 +129,7 @@ contract CrowdFundFactory{
         return(crowd_fund.getAttributes());
     }
 
-    function getSingleCrowdFundByAddress(address _address) public view returns (string memory, string memory, uint256, uint256) {
+    function getSingleCrowdFundByAddress(address _address) public view returns (string memory, string memory, uint256, uint256, string memory) {
         CrowdFund crowd_fund = CrowdFund(address(_address));
 
         // return data

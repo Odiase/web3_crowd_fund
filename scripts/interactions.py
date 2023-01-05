@@ -42,9 +42,9 @@ def fund_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    name = "#EndSars"
+    name = "UkrRusJs"
 
-    tx = contract.fund("Efosa", name, {"from" : account, "value" : 3000000000000000000})
+    tx = contract.fund("Efosa", name, {"from" : account, "value" : 300000000000000})
     tx.wait(1)
 
 
@@ -77,9 +77,9 @@ def get_user_crowdFunds():
 
 def main():
     # create_crowd_fund()
-    #fund_crowd_fund()
+    fund_crowd_fund()
     #withdraw_funds()
-    get_crowd_fund()
-    get_user_crowdFunds()
+    #get_crowd_fund()
+    #get_user_crowdFunds()
 
     
