@@ -42,9 +42,8 @@ def fund_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    name = "UkrRusJs"
-
-    tx = contract.fund("Efosa", name, {"from" : account, "value" : 300000000000000})
+    name = "UkrRus"
+    tx = contract.fund("Efosa", name, {"from" : account, "value" : 100000000000000000})
     tx.wait(1)
 
 
