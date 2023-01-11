@@ -36,10 +36,9 @@ contract CrowdFund{
 
 
     function fund(string memory _username, uint256 amount, address sender) public payable {
-        uint256 leastValue = 256305105597703;
+        // uint256 leastValue = 256305105597703;
 
         // checking to make sure something is sent
-        require(sender.balance >= leastValue, "This is too little to be sent.");
 
         // updating balance value
         // uint256 valueInWei = amount ether;
@@ -146,7 +145,7 @@ contract CrowdFundFactory{
         CrowdFund crowd_fund = getCrowdFundObject(_crowd_fund_name);
 
         // checking to see if the user can send this amount (Based on the sender's balance)
-        require(msg.sender.balance >= msg.value, "sender does not have enough funds");
+        // require(msg.sender.balance >= msg.value, "sender does not have enough funds");
 
         // calling the fund function in the crowd fund contract and passing in the username, amount and sender's address
         // as arguments
