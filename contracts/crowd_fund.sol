@@ -182,6 +182,7 @@ contract CrowdFundFactory{
     }
 
     function getCrowdFundObject(string memory _name) public view returns (CrowdFund) {
-         return(CrowdFund(address(nameToCrowdFund[_name])));
+        require(crowdFundExists(_name) == true, "This Crowd Fund Does noot Exist");
+        return(CrowdFund(address(nameToCrowdFund[_name])));
     }
 }

@@ -76,9 +76,10 @@ def get_user_crowdFunds():
 
 
 def main():
-    create_crowd_fund()
-    fund_crowd_fund()
-    #withdraw_funds()
+    # create_crowd_fund()
+    #fund_crowd_fund()
+    get_crowd_fund()
+    withdraw_funds()
     get_crowd_fund()
     #get_user_crowdFunds()
 
