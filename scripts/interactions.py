@@ -20,22 +20,20 @@ def get_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    CROWD_FUND_NAME = "Call Of Duty Mobile"
+    CROWD_FUND_NAME = "Call Of Duty Mobiler"
 
     try:
         crowd_fund_tx = contract.getSingleCrowdFund(CROWD_FUND_NAME)
+        # returned data
+        crowd_fund_name = crowd_fund_tx[0]
+        crowd_fund_owner = crowd_fund_tx[1]
+        balance = crowd_fund_tx[2] / (1 * (10 ** 18))
+        funders = crowd_fund_tx[3]
+
+        print(f"The Crowd Fund '{crowd_fund_name}' which was Created by '{crowd_fund_owner}' and has a balance of {balance} ether   with this amount of funders {funders}")
     except:
         print("This CrowdFund Doesn't Exist")
 
-    print(crowd_fund_tx)
-
-    # returned data
-    crowd_fund_name = crowd_fund_tx[0]
-    crowd_fund_owner = crowd_fund_tx[1]
-    balance = crowd_fund_tx[2] / (1 * (10 ** 18))
-    funders = crowd_fund_tx[3]
-
-    print(f"The Crowd Fund '{crowd_fund_name}' which was Created by '{crowd_fund_owner}' and has a balance of {balance} ether   with this amount of funders {funders}")
 
 
 def fund_crowd_fund():
@@ -44,7 +42,7 @@ def fund_crowd_fund():
 
     name = "Call Of Duty Mobile"
     print("Account ; ", account)
-    tx = contract.fund("Efosa", name, {"from" : account, "value" : 100000000000000000})
+    tx = contract.fund("Efosa", name, {"from" : account, "value" : 10000000000000000000})
     tx.wait(1)
 
 
@@ -54,8 +52,10 @@ def withdraw_funds():
 
     name = "Call Of Duty Mobile"
 
+    print("\n Withrawing.....\n")
     tx = contract.withdrawBalance(name, {"from" : account})
     tx.wait(1)
+    print("Withdrawn!\n")
 
 def get_crowd_fund_by_address(address):
     account = get_account()
@@ -77,8 +77,7 @@ def get_user_crowdFunds():
 
 def main():
     # create_crowd_fund()
-    #fund_crowd_fund()
-    get_crowd_fund()
+    fund_crowd_fund()
     withdraw_funds()
     get_crowd_fund()
     #get_user_crowdFunds()
