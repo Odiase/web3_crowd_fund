@@ -20,7 +20,7 @@ def get_crowd_fund():
     account = get_account()
     contract = get_factory_contract()
 
-    CROWD_FUND_NAME = "Call Of Duty Mobiler"
+    CROWD_FUND_NAME = "Call Of Duty Mobile"
 
     try:
         crowd_fund_tx = contract.getSingleCrowdFund(CROWD_FUND_NAME)
@@ -77,7 +77,7 @@ def get_user_crowdFunds():
 
 def main():
     # create_crowd_fund()
-    fund_crowd_fund()
+    # fund_crowd_fund()
     withdraw_funds()
     get_crowd_fund()
     #get_user_crowdFunds()
